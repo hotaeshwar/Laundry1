@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Truck, Sparkles, Check, ArrowLeft, X, Zap } from 'lucide-react';
+import { Truck, Sparkles, Check, ArrowLeft, X, Zap, Shield } from 'lucide-react';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CURRENCY CONFIG
@@ -202,6 +202,7 @@ const Pricing = ({ onClose, onBookingClick }) => {
   const ironLinenTotal = ironLinen.reduce((s, q, i) => s + q * rates.ironLinen[i], 0);
   const grandTotal = washTotal + ironClothesTotal + ironLinenTotal;
 
+  // ── FIX: loads now correctly counts kg wash loads (Col 1 top stepper) ──
   const totalLoads = qtyKg;
   const totalBlankets = qtySingle + qtyDouble;
   const totalItems = ironClothes.reduce((s, v) => s + v, 0) + ironLinen.reduce((s, v) => s + v, 0);
@@ -227,34 +228,22 @@ const Pricing = ({ onClose, onBookingClick }) => {
       {modal === 'iron' && <PriceModal title="Steam Iron — Full Price List" items={steamIronItems} sym={sym} onClose={() => setModal(null)} />}
       {modal === 'dry' && <PriceModal title="Dry Cleaning — Full Price List" items={dryCleanItems} sym={sym} onClose={() => setModal(null)} />}
 
-      {/* ── HERO SECTION (full image with dark overlay, nav + content inside) ── */}
+      {/* ── HERO ── */}
       <div className="relative w-full overflow-hidden" style={{ minHeight: 380 }}>
-        {/* Background image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/images/franchaise.jpg')" }}
-        />
-        {/* Dark overlay — same as Image 2 style */}
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/franchaise.jpg')" }} />
         <div className="absolute inset-0" style={{ background: 'rgba(10, 30, 50, 0.72)' }} />
-
-        {/* ── Hero content ── */}
         <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-16 sm:py-20">
-          {/* Badge */}
           <div className="inline-flex items-center gap-2 border px-4 py-1.5 rounded-full mb-5"
             style={{ background: 'rgba(26,166,179,0.18)', borderColor: 'rgba(26,166,179,0.5)' }}>
             <Sparkles className="w-3.5 h-3.5" style={{ color: '#1aa6b3' }} />
             <span className="text-sm font-semibold" style={{ color: '#1aa6b3' }}>Transparent Pricing · No Hidden Fees</span>
           </div>
-
-          {/* Heading */}
           <h1 className="text-4xl sm:text-6xl font-extrabold mb-4 leading-tight" style={{ color: '#1aa6b3', textShadow: '0 0 30px rgba(26,166,179,0.5)' }}>
             Our Pricing
           </h1>
           <p className="text-base sm:text-lg font-medium mb-6" style={{ color: 'rgba(26,166,179,0.9)', textShadow: '0 0 12px rgba(26,166,179,0.4)' }}>
             Professional laundry care at honest prices.
           </p>
-
-          {/* Free pickup badge */}
           <div className="inline-flex items-center gap-2 border px-5 py-2.5 rounded-full mb-5"
             style={{ background: 'rgba(26,166,179,0.15)', borderColor: 'rgba(26,166,179,0.5)' }}>
             <Truck className="w-4 h-4" style={{ color: '#1aa6b3' }} />
@@ -262,23 +251,18 @@ const Pricing = ({ onClose, onBookingClick }) => {
               FREE Pick up &amp; Drop on orders above {fmt(sym, rates.minOrder, 0)}
             </span>
           </div>
-
-          {/* Inline badge pills */}
           <div className="flex flex-wrap items-center justify-center gap-3 mt-2">
             {[
-              { icon: '✨', label: '50% OFF 1st Order' },
-              { icon: '⚡', label: 'Express 3-Hour Service Free' },
-              { icon: '🛡️', label: 'No Hidden Charges' },
+              { icon: Sparkles, label: '50% OFF 1st Order' },
+              { icon: Zap, label: 'Express 3-Hour Service Free' },
+              { icon: Shield, label: 'No Hidden Charges' },
             ].map((b, i) => (
-              <span key={i}
-                className="inline-flex items-center gap-1.5 text-sm font-semibold px-4 py-2 rounded-full"
+              <span key={i} className="inline-flex items-center gap-1.5 text-sm font-semibold px-4 py-2 rounded-full"
                 style={{ background: 'rgba(26,166,179,0.18)', border: '1px solid rgba(26,166,179,0.4)', color: '#1aa6b3', backdropFilter: 'blur(8px)' }}>
-                {b.icon} {b.label}
+                <b.icon className="w-4 h-4" /> {b.label}
               </span>
             ))}
           </div>
-
-          {/* Currency switcher */}
           <div className="inline-flex items-center gap-3 mt-5 px-5 py-2.5 rounded-full"
             style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.25)', backdropFilter: 'blur(10px)' }}>
             <span className="text-white/80 text-xs font-semibold">Viewing prices in:</span>
@@ -376,27 +360,28 @@ const Pricing = ({ onClose, onBookingClick }) => {
           <div className="rounded-3xl overflow-hidden shadow-2xl" style={{ background: '#1aa6b3' }}>
             <div className="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-white/20">
 
-              {/* COL 1 */}
+              {/* COL 1 — Wash, Dry and Fold */}
               <div className="p-6 sm:p-8">
                 <div className="flex items-center gap-3 mb-7">
                   <img src="/images/laundry-service.png" alt="" className="w-9 h-9 object-contain filter brightness-0 invert" />
                   <h4 className="text-white font-bold text-xl">Wash, Dry and Fold</h4>
                 </div>
                 <div className="space-y-5">
+                  {/* ── FIX: onChange now calls setQtyKg so totalLoads updates ── */}
                   <div className="flex items-start gap-3">
-                    <Stepper value={qtyKg} onChange={setQtyKg} />
+                    <Stepper value={qtyKg} onChange={(v) => setQtyKg(v)} />
                     <p className="text-white text-sm leading-snug pt-1">
                       <span className="font-bold currency-flip" key={`r1-${currency}`}>{fmt(sym, rates.kg)}</span> per kg load of washing
                     </p>
                   </div>
                   <div className="flex items-start gap-3">
-                    <Stepper value={qtySingle} onChange={setQtySingle} />
+                    <Stepper value={qtySingle} onChange={(v) => setQtySingle(v)} />
                     <p className="text-white text-sm leading-snug pt-1">
                       <span className="font-bold currency-flip" key={`r2-${currency}`}>{fmt(sym, rates.single)}</span> per comforter / blanket (single)
                     </p>
                   </div>
                   <div className="flex items-start gap-3">
-                    <Stepper value={qtyDouble} onChange={setQtyDouble} />
+                    <Stepper value={qtyDouble} onChange={(v) => setQtyDouble(v)} />
                     <p className="text-white text-sm leading-snug pt-1">
                       <span className="font-bold currency-flip" key={`r3-${currency}`}>{fmt(sym, rates.double)}</span> per comforter / blanket (double / queen / king)
                     </p>
@@ -404,7 +389,7 @@ const Pricing = ({ onClose, onBookingClick }) => {
                 </div>
               </div>
 
-              {/* COL 2 */}
+              {/* COL 2 — Ironing Clothes */}
               <div className="p-6 sm:p-8">
                 <div className="flex items-center gap-3 mb-7">
                   <img src="/images/steam-iron.png" alt="" className="w-9 h-9 object-contain filter brightness-0 invert" />
@@ -426,7 +411,7 @@ const Pricing = ({ onClose, onBookingClick }) => {
                 </button>
               </div>
 
-              {/* COL 3 */}
+              {/* COL 3 — Ironing Linen */}
               <div className="p-6 sm:p-8">
                 <div className="flex items-center gap-3 mb-7">
                   <img src="/images/pillow.png" alt="" className="w-9 h-9 object-contain filter brightness-0 invert" />
@@ -463,28 +448,35 @@ const Pricing = ({ onClose, onBookingClick }) => {
                   Estimate<br />Calculator
                 </h3>
               </div>
+
               <div className="flex-1 flex flex-wrap items-center justify-center gap-6 sm:gap-10 px-6 py-5"
                 style={{ borderRight: '1px solid rgba(26,166,179,0.15)' }}>
+
+                {/* ── LOADS — now reactive to qtyKg stepper ── */}
                 <div className="flex flex-col items-center gap-1.5">
                   <img src="/images/laundry-service.png" alt="loads" className="w-10 h-10 object-contain" />
                   <span className="font-bold text-2xl leading-none" style={{ color: '#1aa6b3' }}>{totalLoads}</span>
                   <span className="text-gray-500 text-xs font-medium">loads</span>
                 </div>
+
                 <div className="flex flex-col items-center gap-1.5">
                   <img src="/images/pillow.png" alt="blankets" className="w-10 h-10 object-contain" />
                   <span className="font-bold text-2xl leading-none" style={{ color: '#1aa6b3' }}>{totalBlankets}</span>
                   <span className="text-gray-500 text-xs font-medium">blankets</span>
                 </div>
+
                 <div className="flex flex-col items-center gap-1.5">
                   <img src="/images/steam-iron.png" alt="items" className="w-10 h-10 object-contain" />
                   <span className="font-bold text-2xl leading-none" style={{ color: '#1aa6b3' }}>{totalItems}</span>
                   <span className="text-gray-500 text-xs font-medium">items</span>
                 </div>
+
                 <div className="flex flex-col items-center gap-1.5">
                   <Truck className="w-10 h-10" style={{ color: '#1aa6b3' }} />
                   <span className="font-bold text-sm text-center leading-tight" style={{ color: '#1aa6b3' }}>Pick up<br />and delivery</span>
                 </div>
               </div>
+
               <div className="flex flex-row items-center gap-5 px-6 py-5 flex-shrink-0">
                 <p className="text-4xl sm:text-5xl font-bold whitespace-nowrap currency-flip" key={`total-${currency}`}
                   style={{ color: '#1aa6b3' }}>
@@ -531,7 +523,7 @@ const Pricing = ({ onClose, onBookingClick }) => {
               onClick={onBookingClick}
               className="split-btn relative overflow-hidden bg-white font-bold rounded-2xl shadow-lg text-base inline-flex items-center"
               style={{ color: '#1aa6b3', padding: 0 }}>
-              <span className="split-left relative z-10 px-6 py-3.5 transition-all duration-300">📅</span>
+              <span className="split-left relative z-10 px-6 py-3.5 transition-all duration-300 flex items-center"><Truck className="w-4 h-4" /></span>
               <span className="split-right relative z-10 px-6 py-3.5 transition-all duration-300 border-l"
                 style={{ borderColor: 'rgba(26,166,179,0.2)' }}>Schedule Pickup</span>
             </button>

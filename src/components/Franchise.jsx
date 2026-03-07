@@ -145,8 +145,6 @@ const Franchise = () => {
     { id: "4", title: "Operations Guide", thumbnail: "/images/last.png", embedUrl: "https://drive.google.com/file/d/1S16XSKkPaumkojHYNb8jiaDqLDq7Yr9f/preview" }
   ];
 
-  const roImages = ['/images/ro.jpg','/images/ro1.jpg','/images/ro2.jpg','/images/ro3.jpg','/images/ro4.jpg','/images/ro5.jpg','/images/ro6.jpg'];
-
   const supportItems = [
     { title: "Operations Support", desc: "Our operations training ensures franchisees become experts at high-quality cleaning techniques with 4.4/5 ratings." },
     { title: "Hiring & Training Support", desc: "We'll help you hire & train the right team with all required operational skills to run a successful business." },
@@ -224,8 +222,8 @@ const Franchise = () => {
         <div className="absolute bottom-20 left-10 w-96 h-96 bg-[#1aa6b3]/5 rounded-full blur-3xl"></div>
       </div>
 
-      {/* ── Hero ── */}
-      <section ref={heroRef} className="fade-in-up relative overflow-hidden text-white pt-10 pb-12 md:pt-14 md:pb-16 px-4">
+      {/* ── Hero ── FIX: pt-24/md:pt-28 pushes content below navbar */}
+      <section ref={heroRef} className="fade-in-up relative overflow-hidden text-white pt-36 pb-12 md:pt-40 md:pb-16 px-4">
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/images/franchaise.jpg')" }}></div>
         <div className="absolute inset-0 bg-black/55"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -276,7 +274,7 @@ const Franchise = () => {
         </div>
       </section>
 
-      {/* ── NEW: WHY INVEST — Section 1 (India's 7th Largest Industry) ── */}
+      {/* ── WHY INVEST ── */}
       <AnimatedSection className="w-full py-10 sm:py-16 bg-white relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
@@ -304,54 +302,47 @@ const Franchise = () => {
             </div>
           </AnimatedSection>
 
-          {/* Point 2 */}
+          {/* Point 2 — FIX: removed duplicate card-style table, kept only the styled table version */}
           <AnimatedSection delay={150} className="mb-10 sm:mb-14">
-            <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12 bg-gradient-to-br from-[#f0fafb] to-white rounded-3xl p-6 sm:p-10 border border-[#1aa6b3]/15 shadow-md">
-              <div className="flex-1 w-full max-w-md lg:max-w-none">
-                <div className="rounded-2xl overflow-hidden shadow-xl border border-[#1aa6b3]/20">
-                  <img src="/images/business-img.jpg" alt="Most Profitable Franchise" className="w-full h-auto object-cover" />
-                </div>
+            <div className="bg-gradient-to-br from-[#f0fafb] to-white rounded-3xl p-6 sm:p-10 border border-[#1aa6b3]/15 shadow-md">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-[#1aa6b3] text-[#1aa6b3] font-bold text-lg shrink-0">2</span>
+                <h3 className="text-xl sm:text-2xl font-bold text-[#1aa6b3]">Laundry Is INDIA'S Most Profitable Franchise Business</h3>
               </div>
-              <div className="flex-1">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-[#1aa6b3] text-[#1aa6b3] font-bold text-lg shrink-0">2</span>
-                  <h3 className="text-xl sm:text-2xl font-bold text-[#1aa6b3]">Laundry Is INDIA'S Most Profitable Franchise Business</h3>
-                </div>
-                <p className="text-sm sm:text-base text-[#1aa6b3]/80 leading-relaxed mb-5">The Laundry & Dry cleaning franchise offers high scope of growth with <span className="text-[#1aa6b3] font-bold">High ROI, Low Risk and Zero Hassles</span> — making Laundry the best investment.</p>
-                {/* Comparison table */}
-                <div className="overflow-x-auto rounded-xl border border-[#1aa6b3]/20 shadow-sm">
-                  <table className="w-full text-xs sm:text-sm">
-                    <thead>
-                      <tr className="bg-[#1aa6b3] text-white">
-                        <th className="text-left py-2.5 px-3 font-semibold">Feature</th>
-                        {['Laundry','Food','Gym','Salon'].map(h => (
-                          <th key={h} className="py-2.5 px-3 font-semibold text-center">{h}</th>
+              <p className="text-sm sm:text-base text-[#1aa6b3]/80 leading-relaxed mb-5">The Laundry & Dry cleaning franchise offers high scope of growth with <span className="text-[#1aa6b3] font-bold">High ROI, Low Risk and Zero Hassles</span> — making Laundry the best investment.</p>
+              {/* Comparison table only — no duplicate image card */}
+              <div className="overflow-x-auto rounded-xl border border-[#1aa6b3]/20 shadow-sm">
+                <table className="w-full text-xs sm:text-sm">
+                  <thead>
+                    <tr className="bg-[#1aa6b3] text-white">
+                      <th className="text-left py-2.5 px-3 font-semibold">Feature</th>
+                      {['Laundry','Food','Gym','Salon'].map(h => (
+                        <th key={h} className="py-2.5 px-3 font-semibold text-center">{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      { label: 'Recession-Proof Business', sub: 'Never ending demand', vals: [true,true,false,false] },
+                      { label: 'High Margin, Low Risk', sub: 'Service business, no legal risk', vals: [true,false,true,false] },
+                      { label: 'Automation', sub: 'Manageable remotely', vals: [true,false,false,false] },
+                      { label: 'Inventory', sub: 'Low-inventory, no wastage', vals: [true,false,true,false] },
+                      { label: 'Omnichannel Business', sub: 'Online-to-offline model', vals: [true,true,false,false] },
+                    ].map((row, i) => (
+                      <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-[#f0fafb]'}>
+                        <td className="py-2.5 px-3">
+                          <p className="font-semibold text-[#1aa6b3]">{row.label}</p>
+                          <p className="text-[#1aa6b3]/60 text-xs">{row.sub}</p>
+                        </td>
+                        {row.vals.map((v, j) => (
+                          <td key={j} className="py-2.5 px-3 text-center">
+                            {v ? <CheckCircle2 className="w-5 h-5 text-green-500 mx-auto" /> : <XCircle className="w-5 h-5 text-red-400 mx-auto" />}
+                          </td>
                         ))}
                       </tr>
-                    </thead>
-                    <tbody>
-                      {[
-                        { label: 'Recession-Proof Business', sub: 'Never ending demand', vals: [true,true,false,false] },
-                        { label: 'High Margin, Low Risk', sub: 'Service business, no legal risk', vals: [true,false,true,false] },
-                        { label: 'Automation', sub: 'Manageable remotely', vals: [true,false,false,false] },
-                        { label: 'Inventory', sub: 'Low-inventory, no wastage', vals: [true,false,true,false] },
-                        { label: 'Omnichannel Business', sub: 'Online-to-offline model', vals: [true,true,false,false] },
-                      ].map((row, i) => (
-                        <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-[#f0fafb]'}>
-                          <td className="py-2.5 px-3">
-                            <p className="font-semibold text-[#1aa6b3]">{row.label}</p>
-                            <p className="text-[#1aa6b3]/60 text-xs">{row.sub}</p>
-                          </td>
-                          {row.vals.map((v, j) => (
-                            <td key={j} className="py-2.5 px-3 text-center">
-                              {v ? <CheckCircle2 className="w-5 h-5 text-green-500 mx-auto" /> : <XCircle className="w-5 h-5 text-red-400 mx-auto" />}
-                            </td>
-                          ))}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           </AnimatedSection>
@@ -364,57 +355,35 @@ const Franchise = () => {
                 <h3 className="text-xl sm:text-2xl font-bold text-[#1aa6b3]">Low-Investment & Small Format Model</h3>
               </div>
 
-              {/* Ladder — alternating left/right */}
               <div className="relative">
-                {/* Centre spine line — hidden on mobile, visible md+ */}
                 <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#1aa6b3]/40 via-[#1aa6b3] to-[#158993]/40 -translate-x-1/2"></div>
 
                 {[
-                  { label: 'Typical Store Area',          value: curr.storeArea,          img: '/images/ro.jpg',  step: 1 },
-                  { label: 'Setup Cost (incl. franchise fee)', value: curr.setupCost,      img: '/images/ro1.jpg', step: 2 },
-                  { label: 'Franchise Fee',                value: curr.franchiseFeeDisplay, img: '/images/ro2.jpg', step: 3 },
-                  { label: 'Royalty',                      value: curr.royalty,            img: '/images/ro3.jpg', step: 4 },
-                  { label: 'Average Revenue / Month',      value: curr.avgRevenue,         img: '/images/ro4.jpg', step: 5 },
-                  { label: 'Average Profitability / Month',value: curr.avgProfit,          img: '/images/ro5.jpg', step: 6 },
+                  { label: 'Typical Store Area',               value: curr.storeArea,  img: '/images/ro.jpg',  step: 1 },
+                  { label: 'Setup Cost (incl. franchise fee)',  value: curr.setupCost,  img: '/images/ro1.jpg', step: 2 },
+                  { label: 'Average Revenue / Month',           value: curr.avgRevenue, img: '/images/ro4.jpg', step: 3 },
+                  { label: 'Average Profitability / Month',     value: curr.avgProfit,  img: '/images/ro5.jpg', step: 4 },
                 ].map((item, i) => {
                   const isLeft = i % 2 === 0;
                   return (
                     <div key={i} className={`relative flex flex-col md:flex-row items-center mb-8 sm:mb-10 gap-4 md:gap-0 ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-
-                      {/* Content side */}
                       <div className={`w-full md:w-5/12 ${isLeft ? 'md:pr-10' : 'md:pl-10'}`}>
-                        <div
-                          className="group bg-white rounded-2xl shadow-md hover:shadow-xl border border-[#1aa6b3]/20 hover:border-[#1aa6b3] transition-all duration-300 overflow-hidden flex flex-row md:flex-col sm:flex-row"
-                          style={{ minHeight: '110px' }}
-                        >
-                          {/* Image strip */}
+                        <div className="group bg-white rounded-2xl shadow-md hover:shadow-xl border border-[#1aa6b3]/20 hover:border-[#1aa6b3] transition-all duration-300 overflow-hidden flex flex-row md:flex-col sm:flex-row" style={{ minHeight: '110px' }}>
                           <div className="relative w-36 sm:w-44 md:w-full md:h-44 shrink-0 overflow-hidden bg-gray-50 flex items-center justify-center">
-                            <img
-                              src={item.img}
-                              alt={item.label}
-                              className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
-                              style={{ minHeight: '120px' }}
-                            />
+                            <img src={item.img} alt={item.label} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" style={{ minHeight: '120px' }} />
                           </div>
-                          {/* Text */}
                           <div className="flex-1 p-4 flex flex-col justify-center">
                             <p className="text-xs text-[#1aa6b3]/60 mb-1 uppercase tracking-wide font-medium">{item.label}</p>
                             <p className="text-base sm:text-lg font-bold text-[#1aa6b3] leading-tight">{item.value}</p>
                           </div>
                         </div>
                       </div>
-
-                      {/* Centre node — spine dot + step number */}
                       <div className="hidden md:flex w-2/12 flex-col items-center justify-center shrink-0 z-10">
                         <div className="flex items-center justify-center w-11 h-11 rounded-full bg-gradient-to-br from-[#1aa6b3] to-[#158993] text-white font-bold text-base shadow-lg border-4 border-white">
                           {item.step}
                         </div>
                       </div>
-
-                      {/* Spacer — opposite side */}
                       <div className="hidden md:block w-5/12"></div>
-
-                      {/* Mobile step badge */}
                       <div className="md:hidden absolute -left-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-7 h-7 rounded-full bg-[#1aa6b3] text-white font-bold text-xs shadow-md border-2 border-white">
                         {item.step}
                       </div>
@@ -422,17 +391,14 @@ const Franchise = () => {
                   );
                 })}
 
-                {/* Gross Profit — full-width terminal rung */}
+                {/* Gross Profit */}
                 <div className="relative flex flex-col md:flex-row items-center gap-4">
-                  {/* Left spacer */}
                   <div className="hidden md:block w-5/12"></div>
-                  {/* Centre node — final */}
                   <div className="hidden md:flex w-2/12 flex-col items-center justify-center shrink-0 z-10">
                     <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#158993] to-[#0d6b76] text-white shadow-xl border-4 border-white">
-                      <span className="text-lg font-black">7</span>
+                      <span className="text-lg font-black">5</span>
                     </div>
                   </div>
-                  {/* Right — gross profit banner */}
                   <div className="w-full md:w-5/12 md:pl-10">
                     <div className="flex flex-row items-center gap-4 bg-gradient-to-r from-[#1aa6b3] to-[#158993] rounded-2xl p-4 sm:p-5 text-white shadow-lg overflow-hidden relative">
                       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top_right,_white_0%,_transparent_70%)]"></div>
@@ -446,8 +412,7 @@ const Franchise = () => {
                       </div>
                     </div>
                   </div>
-                  {/* Mobile step badge */}
-                  <div className="md:hidden absolute -left-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-7 h-7 rounded-full bg-[#158993] text-white font-bold text-xs shadow-md border-2 border-white">7</div>
+                  <div className="md:hidden absolute -left-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-7 h-7 rounded-full bg-[#158993] text-white font-bold text-xs shadow-md border-2 border-white">5</div>
                 </div>
               </div>
             </div>

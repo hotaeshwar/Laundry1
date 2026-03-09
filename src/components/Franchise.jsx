@@ -24,7 +24,7 @@ const CURRENCIES = {
     investmentOptions: ['CA$8,250 - CA$16,500', 'CA$16,500 - CA$33,000', 'CA$33,000 - CA$82,500', 'CA$82,500+'],
     faqFee: 'CA$3,300 - CA$8,250 based on location',
     setupCost: 'CA$30,000 – CA$1,00,000', storeArea: '250-300 sq. ft.', franchiseFeeDisplay: 'CA$9,900 (+Taxes)',
-    royalty: '7% of gross sales', avgRevenue: '₹3,00,000 – ₹4,00,000/month',
+    royalty: '7% of gross sales', avgRevenue: 'CA$4,950 – CA$6,600/month',
     avgProfit: 'CA$2,475 - CA$3,300/month', grossProfit: '70%',
   }
 };
@@ -295,112 +295,8 @@ const Franchise = () => {
                 <p className="text-sm sm:text-base text-[#1aa6b3]/80 leading-relaxed">With huge investments flowing in, it is now expected to explode just like food delivery (Swiggy, Zomato), UPI payments (PayTM, PhonePe), and online cabs (Ola, Uber).</p>
               </div>
               <div className="flex-1 order-1 lg:order-2 w-full max-w-md lg:max-w-none">
-                <div className="rounded-2xl shadow-xl border border-[#1aa6b3]/20 bg-gradient-to-br from-[#f0fafb] to-white p-4">
-                  <svg viewBox="0 0 420 370" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
-                    <defs>
-                      {/* 3D bar gradients */}
-                      <linearGradient id="bar1front" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#d4f03a"/><stop offset="100%" stopColor="#a8c220"/></linearGradient>
-                      <linearGradient id="bar1side"  x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stopColor="#a8c220"/><stop offset="100%" stopColor="#7a9010"/></linearGradient>
-                      <linearGradient id="bar1top"   x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#e8f870"/><stop offset="100%" stopColor="#c4d830"/></linearGradient>
-
-                      <linearGradient id="bar2front" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#8ed44a"/><stop offset="100%" stopColor="#5daa20"/></linearGradient>
-                      <linearGradient id="bar2side"  x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stopColor="#5daa20"/><stop offset="100%" stopColor="#3d7a10"/></linearGradient>
-                      <linearGradient id="bar2top"   x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#aae870"/><stop offset="100%" stopColor="#78c840"/></linearGradient>
-
-                      <linearGradient id="bar3front" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#5cbf5c"/><stop offset="100%" stopColor="#2e8b2e"/></linearGradient>
-                      <linearGradient id="bar3side"  x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stopColor="#2e8b2e"/><stop offset="100%" stopColor="#1a5e1a"/></linearGradient>
-                      <linearGradient id="bar3top"   x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#80d880"/><stop offset="100%" stopColor="#4caf4c"/></linearGradient>
-
-                      <linearGradient id="bar4front" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#2d7a5a"/><stop offset="100%" stopColor="#1a5040"/></linearGradient>
-                      <linearGradient id="bar4side"  x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stopColor="#1a5040"/><stop offset="100%" stopColor="#0d3028"/></linearGradient>
-                      <linearGradient id="bar4top"   x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#4aa880"/><stop offset="100%" stopColor="#2d7a5a"/></linearGradient>
-
-                      <filter id="shadow"><feDropShadow dx="4" dy="8" stdDeviation="6" floodColor="#00000030"/></filter>
-                    </defs>
-
-                    {/* ── Isometric 3D bars — skew offset: +14px X, -8px Y per depth unit ── */}
-                    {/* depth = 18px, bar width = 54px */}
-
-                    {/* Bar 1 — Pre School $4.6bn — height 80 */}
-                    {(() => {
-                      const bx=60, by=290, bw=54, bh=80, d=18;
-                      return (
-                        <g filter="url(#shadow)">
-                          {/* front */}
-                          <rect x={bx} y={by-bh} width={bw} height={bh} fill="url(#bar1front)"/>
-                          {/* side */}
-                          <polygon points={`${bx+bw},${by-bh} ${bx+bw+d},${by-bh-d/2} ${bx+bw+d},${by-d/2} ${bx+bw},${by}`} fill="url(#bar1side)"/>
-                          {/* top */}
-                          <polygon points={`${bx},${by-bh} ${bx+bw},${by-bh} ${bx+bw+d},${by-bh-d/2} ${bx+d},${by-bh-d/2}`} fill="url(#bar1top)"/>
-                          {/* shadow ellipse */}
-                          <ellipse cx={bx+bw/2+d/2} cy={by+4} rx={bw/2+4} ry={6} fill="#00000015"/>
-                        </g>
-                      );
-                    })()}
-
-                    {/* Bar 2 — Beauty & Wellness $9.0bn — height 130 */}
-                    {(() => {
-                      const bx=134, by=290, bw=54, bh=130, d=18;
-                      return (
-                        <g filter="url(#shadow)">
-                          <rect x={bx} y={by-bh} width={bw} height={bh} fill="url(#bar2front)"/>
-                          <polygon points={`${bx+bw},${by-bh} ${bx+bw+d},${by-bh-d/2} ${bx+bw+d},${by-d/2} ${bx+bw},${by}`} fill="url(#bar2side)"/>
-                          <polygon points={`${bx},${by-bh} ${bx+bw},${by-bh} ${bx+bw+d},${by-bh-d/2} ${bx+d},${by-bh-d/2}`} fill="url(#bar2top)"/>
-                          <ellipse cx={bx+bw/2+d/2} cy={by+4} rx={bw/2+4} ry={6} fill="#00000015"/>
-                        </g>
-                      );
-                    })()}
-
-                    {/* Bar 3 — Diagnostic Labs $28.6bn — height 210 */}
-                    {(() => {
-                      const bx=208, by=290, bw=54, bh=210, d=18;
-                      return (
-                        <g filter="url(#shadow)">
-                          <rect x={bx} y={by-bh} width={bw} height={bh} fill="url(#bar3front)"/>
-                          <polygon points={`${bx+bw},${by-bh} ${bx+bw+d},${by-bh-d/2} ${bx+bw+d},${by-d/2} ${bx+bw},${by}`} fill="url(#bar3side)"/>
-                          <polygon points={`${bx},${by-bh} ${bx+bw},${by-bh} ${bx+bw+d},${by-bh-d/2} ${bx+d},${by-bh-d/2}`} fill="url(#bar3top)"/>
-                          <ellipse cx={bx+bw/2+d/2} cy={by+4} rx={bw/2+4} ry={6} fill="#00000015"/>
-                        </g>
-                      );
-                    })()}
-
-                    {/* Bar 4 — Laundry $35.83bn — height 268 */}
-                    {(() => {
-                      const bx=282, by=290, bw=54, bh=268, d=18;
-                      return (
-                        <g filter="url(#shadow)">
-                          <rect x={bx} y={by-bh} width={bw} height={bh} fill="url(#bar4front)"/>
-                          <polygon points={`${bx+bw},${by-bh} ${bx+bw+d},${by-bh-d/2} ${bx+bw+d},${by-d/2} ${bx+bw},${by}`} fill="url(#bar4side)"/>
-                          <polygon points={`${bx},${by-bh} ${bx+bw},${by-bh} ${bx+bw+d},${by-bh-d/2} ${bx+d},${by-bh-d/2}`} fill="url(#bar4top)"/>
-                          <ellipse cx={bx+bw/2+d/2} cy={by+4} rx={bw/2+4} ry={6} fill="#00000015"/>
-                        </g>
-                      );
-                    })()}
-
-                    {/* ── Labels & connector lines ── */}
-
-                    {/* Pre School */}
-                    <line x1="30" y1="218" x2="87" y2="218" stroke="#7a9010" strokeWidth="1.5"/>
-                    <text x="28" y="212" fontSize="11" fontWeight="700" fill="#5a7010" textAnchor="end">Pre School</text>
-                    <text x="28" y="226" fontSize="11" fontWeight="600" fill="#5a7010" textAnchor="end">$4.6 bn</text>
-
-                    {/* Beauty & Wellness */}
-                    <line x1="30" y1="163" x2="161" y2="163" stroke="#3d7a10" strokeWidth="1.5"/>
-                    <text x="28" y="157" fontSize="11" fontWeight="700" fill="#3d7a10" textAnchor="end">Beauty &amp;</text>
-                    <text x="28" y="170" fontSize="11" fontWeight="700" fill="#3d7a10" textAnchor="end">Wellness</text>
-                    <text x="28" y="183" fontSize="11" fontWeight="600" fill="#3d7a10" textAnchor="end">$9.0 bn</text>
-
-                    {/* Diagnostic Labs */}
-                    <line x1="50" y1="85" x2="235" y2="85" stroke="#1a5e1a" strokeWidth="1.5"/>
-                    <text x="48" y="79" fontSize="11" fontWeight="700" fill="#1a5e1a" textAnchor="end">Diagnostic</text>
-                    <text x="48" y="92" fontSize="11" fontWeight="700" fill="#1a5e1a" textAnchor="end">Labs</text>
-                    <text x="48" y="105" fontSize="11" fontWeight="600" fill="#1a5e1a" textAnchor="end">$28.6 bn</text>
-
-                    {/* Laundry — top label */}
-                    <line x1="300" y1="16" x2="354" y2="22" stroke="#0d3028" strokeWidth="1.5"/>
-                    <text x="170" y="12" fontSize="13" fontWeight="800" fill="#0d3028">Laundry</text>
-                    <text x="170" y="28" fontSize="13" fontWeight="700" fill="#0d3028">$35.83 bn</text>
-                  </svg>
+                <div className="rounded-2xl overflow-hidden shadow-xl border border-[#1aa6b3]/20">
+                  <img src="/images/largest-industry.jpg" alt="India's 7th Largest Industry" className="w-full h-auto object-cover" />
                 </div>
               </div>
             </div>

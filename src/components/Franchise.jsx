@@ -23,7 +23,7 @@ const CURRENCIES = {
     franchiseFee: 'CA$3,300 - CA$8,250',
     investmentOptions: ['CA$8,250 - CA$16,500', 'CA$16,500 - CA$33,000', 'CA$33,000 - CA$82,500', 'CA$82,500+'],
     faqFee: 'CA$3,300 - CA$8,250 based on location',
-    setupCost: '≈ CA$33,000', storeArea: '250-300 sq. ft.', franchiseFeeDisplay: 'CA$9,900 (+Taxes)',
+    setupCost: 'CA$30,000 – CA$1,00,000', storeArea: '250-300 sq. ft.', franchiseFeeDisplay: 'CA$9,900 (+Taxes)',
     royalty: '7% of gross sales', avgRevenue: '₹3,00,000 – ₹4,00,000/month',
     avgProfit: 'CA$2,475 - CA$3,300/month', grossProfit: '70%',
   }
@@ -295,8 +295,112 @@ const Franchise = () => {
                 <p className="text-sm sm:text-base text-[#1aa6b3]/80 leading-relaxed">With huge investments flowing in, it is now expected to explode just like food delivery (Swiggy, Zomato), UPI payments (PayTM, PhonePe), and online cabs (Ola, Uber).</p>
               </div>
               <div className="flex-1 order-1 lg:order-2 w-full max-w-md lg:max-w-none">
-                <div className="rounded-2xl overflow-hidden shadow-xl border border-[#1aa6b3]/20">
-                  <img src="/images/largest-industry.jpg" alt="India's 7th Largest Industry" className="w-full h-auto object-cover" />
+                <div className="rounded-2xl shadow-xl border border-[#1aa6b3]/20 bg-gradient-to-br from-[#f0fafb] to-white p-4">
+                  <svg viewBox="0 0 420 370" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+                    <defs>
+                      {/* 3D bar gradients */}
+                      <linearGradient id="bar1front" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#d4f03a"/><stop offset="100%" stopColor="#a8c220"/></linearGradient>
+                      <linearGradient id="bar1side"  x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stopColor="#a8c220"/><stop offset="100%" stopColor="#7a9010"/></linearGradient>
+                      <linearGradient id="bar1top"   x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#e8f870"/><stop offset="100%" stopColor="#c4d830"/></linearGradient>
+
+                      <linearGradient id="bar2front" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#8ed44a"/><stop offset="100%" stopColor="#5daa20"/></linearGradient>
+                      <linearGradient id="bar2side"  x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stopColor="#5daa20"/><stop offset="100%" stopColor="#3d7a10"/></linearGradient>
+                      <linearGradient id="bar2top"   x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#aae870"/><stop offset="100%" stopColor="#78c840"/></linearGradient>
+
+                      <linearGradient id="bar3front" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#5cbf5c"/><stop offset="100%" stopColor="#2e8b2e"/></linearGradient>
+                      <linearGradient id="bar3side"  x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stopColor="#2e8b2e"/><stop offset="100%" stopColor="#1a5e1a"/></linearGradient>
+                      <linearGradient id="bar3top"   x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#80d880"/><stop offset="100%" stopColor="#4caf4c"/></linearGradient>
+
+                      <linearGradient id="bar4front" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#2d7a5a"/><stop offset="100%" stopColor="#1a5040"/></linearGradient>
+                      <linearGradient id="bar4side"  x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stopColor="#1a5040"/><stop offset="100%" stopColor="#0d3028"/></linearGradient>
+                      <linearGradient id="bar4top"   x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#4aa880"/><stop offset="100%" stopColor="#2d7a5a"/></linearGradient>
+
+                      <filter id="shadow"><feDropShadow dx="4" dy="8" stdDeviation="6" floodColor="#00000030"/></filter>
+                    </defs>
+
+                    {/* ── Isometric 3D bars — skew offset: +14px X, -8px Y per depth unit ── */}
+                    {/* depth = 18px, bar width = 54px */}
+
+                    {/* Bar 1 — Pre School $4.6bn — height 80 */}
+                    {(() => {
+                      const bx=60, by=290, bw=54, bh=80, d=18;
+                      return (
+                        <g filter="url(#shadow)">
+                          {/* front */}
+                          <rect x={bx} y={by-bh} width={bw} height={bh} fill="url(#bar1front)"/>
+                          {/* side */}
+                          <polygon points={`${bx+bw},${by-bh} ${bx+bw+d},${by-bh-d/2} ${bx+bw+d},${by-d/2} ${bx+bw},${by}`} fill="url(#bar1side)"/>
+                          {/* top */}
+                          <polygon points={`${bx},${by-bh} ${bx+bw},${by-bh} ${bx+bw+d},${by-bh-d/2} ${bx+d},${by-bh-d/2}`} fill="url(#bar1top)"/>
+                          {/* shadow ellipse */}
+                          <ellipse cx={bx+bw/2+d/2} cy={by+4} rx={bw/2+4} ry={6} fill="#00000015"/>
+                        </g>
+                      );
+                    })()}
+
+                    {/* Bar 2 — Beauty & Wellness $9.0bn — height 130 */}
+                    {(() => {
+                      const bx=134, by=290, bw=54, bh=130, d=18;
+                      return (
+                        <g filter="url(#shadow)">
+                          <rect x={bx} y={by-bh} width={bw} height={bh} fill="url(#bar2front)"/>
+                          <polygon points={`${bx+bw},${by-bh} ${bx+bw+d},${by-bh-d/2} ${bx+bw+d},${by-d/2} ${bx+bw},${by}`} fill="url(#bar2side)"/>
+                          <polygon points={`${bx},${by-bh} ${bx+bw},${by-bh} ${bx+bw+d},${by-bh-d/2} ${bx+d},${by-bh-d/2}`} fill="url(#bar2top)"/>
+                          <ellipse cx={bx+bw/2+d/2} cy={by+4} rx={bw/2+4} ry={6} fill="#00000015"/>
+                        </g>
+                      );
+                    })()}
+
+                    {/* Bar 3 — Diagnostic Labs $28.6bn — height 210 */}
+                    {(() => {
+                      const bx=208, by=290, bw=54, bh=210, d=18;
+                      return (
+                        <g filter="url(#shadow)">
+                          <rect x={bx} y={by-bh} width={bw} height={bh} fill="url(#bar3front)"/>
+                          <polygon points={`${bx+bw},${by-bh} ${bx+bw+d},${by-bh-d/2} ${bx+bw+d},${by-d/2} ${bx+bw},${by}`} fill="url(#bar3side)"/>
+                          <polygon points={`${bx},${by-bh} ${bx+bw},${by-bh} ${bx+bw+d},${by-bh-d/2} ${bx+d},${by-bh-d/2}`} fill="url(#bar3top)"/>
+                          <ellipse cx={bx+bw/2+d/2} cy={by+4} rx={bw/2+4} ry={6} fill="#00000015"/>
+                        </g>
+                      );
+                    })()}
+
+                    {/* Bar 4 — Laundry $35.83bn — height 268 */}
+                    {(() => {
+                      const bx=282, by=290, bw=54, bh=268, d=18;
+                      return (
+                        <g filter="url(#shadow)">
+                          <rect x={bx} y={by-bh} width={bw} height={bh} fill="url(#bar4front)"/>
+                          <polygon points={`${bx+bw},${by-bh} ${bx+bw+d},${by-bh-d/2} ${bx+bw+d},${by-d/2} ${bx+bw},${by}`} fill="url(#bar4side)"/>
+                          <polygon points={`${bx},${by-bh} ${bx+bw},${by-bh} ${bx+bw+d},${by-bh-d/2} ${bx+d},${by-bh-d/2}`} fill="url(#bar4top)"/>
+                          <ellipse cx={bx+bw/2+d/2} cy={by+4} rx={bw/2+4} ry={6} fill="#00000015"/>
+                        </g>
+                      );
+                    })()}
+
+                    {/* ── Labels & connector lines ── */}
+
+                    {/* Pre School */}
+                    <line x1="30" y1="218" x2="87" y2="218" stroke="#7a9010" strokeWidth="1.5"/>
+                    <text x="28" y="212" fontSize="11" fontWeight="700" fill="#5a7010" textAnchor="end">Pre School</text>
+                    <text x="28" y="226" fontSize="11" fontWeight="600" fill="#5a7010" textAnchor="end">$4.6 bn</text>
+
+                    {/* Beauty & Wellness */}
+                    <line x1="30" y1="163" x2="161" y2="163" stroke="#3d7a10" strokeWidth="1.5"/>
+                    <text x="28" y="157" fontSize="11" fontWeight="700" fill="#3d7a10" textAnchor="end">Beauty &amp;</text>
+                    <text x="28" y="170" fontSize="11" fontWeight="700" fill="#3d7a10" textAnchor="end">Wellness</text>
+                    <text x="28" y="183" fontSize="11" fontWeight="600" fill="#3d7a10" textAnchor="end">$9.0 bn</text>
+
+                    {/* Diagnostic Labs */}
+                    <line x1="50" y1="85" x2="235" y2="85" stroke="#1a5e1a" strokeWidth="1.5"/>
+                    <text x="48" y="79" fontSize="11" fontWeight="700" fill="#1a5e1a" textAnchor="end">Diagnostic</text>
+                    <text x="48" y="92" fontSize="11" fontWeight="700" fill="#1a5e1a" textAnchor="end">Labs</text>
+                    <text x="48" y="105" fontSize="11" fontWeight="600" fill="#1a5e1a" textAnchor="end">$28.6 bn</text>
+
+                    {/* Laundry — top label */}
+                    <line x1="300" y1="16" x2="354" y2="22" stroke="#0d3028" strokeWidth="1.5"/>
+                    <text x="170" y="12" fontSize="13" fontWeight="800" fill="#0d3028">Laundry</text>
+                    <text x="170" y="28" fontSize="13" fontWeight="700" fill="#0d3028">$35.83 bn</text>
+                  </svg>
                 </div>
               </div>
             </div>
@@ -350,9 +454,23 @@ const Franchise = () => {
           {/* Point 3 — Low Investment Model — LADDER DESIGN */}
           <AnimatedSection delay={200} className="mb-10 sm:mb-14">
             <div className="bg-gradient-to-br from-[#f0fafb] to-white rounded-3xl p-6 sm:p-10 border border-[#1aa6b3]/15 shadow-md">
-              <div className="flex items-center gap-3 mb-8 sm:mb-10">
-                <span className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-[#1aa6b3] text-[#1aa6b3] font-bold text-lg shrink-0">3</span>
-                <h3 className="text-xl sm:text-2xl font-bold text-[#1aa6b3]">Low-Investment & Small Format Model</h3>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-8 sm:mb-10">
+                <div className="flex items-center gap-3 flex-1">
+                  <span className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-[#1aa6b3] text-[#1aa6b3] font-bold text-lg shrink-0">3</span>
+                  <h3 className="text-xl sm:text-2xl font-bold text-[#1aa6b3]">Low-Investment & Small Format Model</h3>
+                </div>
+                {/* Currency toggle for Point 3 */}
+                <div className="flex items-center gap-2 px-4 py-2 rounded-full border self-start sm:self-auto" style={{ background: 'rgba(26,166,179,0.07)', borderColor: 'rgba(26,166,179,0.3)' }}>
+                  <span className={`text-xs font-bold cursor-pointer transition-all ${currency === 'INR' ? 'text-[#1aa6b3]' : 'text-[#1aa6b3]/35'}`} onClick={() => setCurrency('INR')}>🇮🇳 INR</span>
+                  <button
+                    onClick={() => setCurrency(c => c === 'CAD' ? 'INR' : 'CAD')}
+                    className="relative rounded-full flex-shrink-0"
+                    style={{ width: 44, height: 24, background: '#1aa6b3', border: '2px solid rgba(26,166,179,0.4)', transition: 'all .3s' }}>
+                    <span className="absolute top-0.5 rounded-full bg-white shadow-md"
+                      style={{ width: 16, height: 16, left: currency === 'CAD' ? 21 : 3, transition: 'all .3s' }} />
+                  </button>
+                  <span className={`text-xs font-bold cursor-pointer transition-all ${currency === 'CAD' ? 'text-[#1aa6b3]' : 'text-[#1aa6b3]/35'}`} onClick={() => setCurrency('CAD')}>🇨🇦 CAD</span>
+                </div>
               </div>
 
               <div className="relative">
@@ -391,15 +509,9 @@ const Franchise = () => {
                   );
                 })}
 
-                {/* Gross Profit */}
+                {/* Gross Profit — LEFT side */}
                 <div className="relative flex flex-col md:flex-row items-center gap-4">
-                  <div className="hidden md:block w-5/12"></div>
-                  <div className="hidden md:flex w-2/12 flex-col items-center justify-center shrink-0 z-10">
-                    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#158993] to-[#0d6b76] text-white shadow-xl border-4 border-white">
-                      <span className="text-lg font-black">5</span>
-                    </div>
-                  </div>
-                  <div className="w-full md:w-5/12 md:pl-10">
+                  <div className="w-full md:w-5/12 md:pr-10">
                     <div className="flex flex-row items-center gap-4 bg-gradient-to-r from-[#1aa6b3] to-[#158993] rounded-2xl p-4 sm:p-5 text-white shadow-lg overflow-hidden relative">
                       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top_right,_white_0%,_transparent_70%)]"></div>
                       <div className="relative w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-xl overflow-hidden shadow-lg bg-white/20 flex items-center justify-center">
@@ -412,6 +524,12 @@ const Franchise = () => {
                       </div>
                     </div>
                   </div>
+                  <div className="hidden md:flex w-2/12 flex-col items-center justify-center shrink-0 z-10">
+                    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#158993] to-[#0d6b76] text-white shadow-xl border-4 border-white">
+                      <span className="text-lg font-black">5</span>
+                    </div>
+                  </div>
+                  <div className="hidden md:block w-5/12"></div>
                   <div className="md:hidden absolute -left-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-7 h-7 rounded-full bg-[#158993] text-white font-bold text-xs shadow-md border-2 border-white">5</div>
                 </div>
               </div>

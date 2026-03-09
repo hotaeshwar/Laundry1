@@ -105,21 +105,13 @@ const BookingPage = () => {
     }
   };
 
-  const [askMoreServices, setAskMoreServices] = useState(false);
-
+  // ── FIX: removed askMoreServices state and popup — services toggle silently ──
   const handleServiceSelect = (service) => {
     if (formData.selectedServices.some(s => s.id === service.id)) {
       setFormData(prev => ({ ...prev, selectedServices: prev.selectedServices.filter(s => s.id !== service.id) }));
-      setAskMoreServices(false);
     } else {
       setFormData(prev => ({ ...prev, selectedServices: [...prev.selectedServices, service], serviceType: service.name }));
-      setAskMoreServices(true);
     }
-  };
-
-  const handleNoMoreServices = () => {
-    setAskMoreServices(false);
-    setTimeout(() => dateRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
   };
 
   const removeService = (serviceId) => {
@@ -219,7 +211,6 @@ const BookingPage = () => {
               </p>
             </div>
           )}
-
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#1aa6b3] to-[#158993] bg-clip-text text-transparent">
             Schedule Your Free Pickup
           </h1>
@@ -255,7 +246,7 @@ const BookingPage = () => {
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-1 animate-bounce" />
                     <div className="flex-1">
-                      <p className="text-green-800 font-bold text-lg flex items-center gap-2">Booking Successful! ✅ <Sparkles className="w-5 h-5" /></p>
+                      <p className="text-green-800 font-bold text-lg flex items-center gap-2">Booking Successful! <Sparkles className="w-5 h-5" /></p>
                       <div className="mt-3 mb-4 p-4 bg-white border-2 border-green-300 rounded-xl relative shadow-sm">
                         <div className="flex justify-between items-center">
                           <div>
@@ -268,11 +259,11 @@ const BookingPage = () => {
                         </div>
                         {showCopySuccess && <div className="absolute -top-2 right-4 bg-green-500 text-white text-xs px-3 py-1 rounded-full animate-fade-in-out shadow-lg">Copied!</div>}
                       </div>
-                      <p className="text-green-700 mb-2">✅ A copy has been sent to your email.</p>
-                      <p className="text-green-700 mb-2">📞 We will contact you at <strong>{formData.phone || 'your phone number'}</strong></p>
-                      <p className="text-green-700 mb-3">📅 Pickup: <strong>{formData.pickupDate}</strong> at <strong>{formData.pickupTime}</strong></p>
+                      <p className="text-green-700 mb-2">A copy has been sent to your email.</p>
+                      <p className="text-green-700 mb-2">We will contact you at <strong>{formData.phone || 'your phone number'}</strong></p>
+                      <p className="text-green-700 mb-3">Pickup: <strong>{formData.pickupDate}</strong> at <strong>{formData.pickupTime}</strong></p>
                       <div className="mt-3 p-3 bg-green-100 rounded-xl border border-green-300">
-                        <p className="text-green-800 text-sm font-medium">💬 A WhatsApp message has been sent to our team!</p>
+                        <p className="text-green-800 text-sm font-medium">A WhatsApp message has been sent to our team!</p>
                       </div>
                       <div className="mt-4 pt-4 border-t border-green-200">
                         <button type="button" onClick={resetForm} className="text-green-700 hover:text-green-900 font-medium underline">Make Another Booking</button>
@@ -284,7 +275,7 @@ const BookingPage = () => {
 
               {submitStatus === 'error' && (
                 <div className="mb-6 p-6 bg-red-50 border-2 border-red-200 rounded-2xl shadow-lg">
-                  <p className="text-red-800 font-bold text-lg">Booking Failed! ❌</p>
+                  <p className="text-red-800 font-bold text-lg">Booking Failed!</p>
                   <p className="text-red-700 mt-2">Please try again or contact us at {br.phone}.</p>
                   <button type="button" onClick={() => setSubmitStatus('')} className="mt-3 text-red-700 hover:text-red-900 font-medium underline">Try Again</button>
                 </div>
@@ -336,11 +327,13 @@ const BookingPage = () => {
                     </div>
                   </div>
 
+                  {/* ── Services — no popup, just silent toggle ── */}
                   <div>
                     <div className="flex justify-between items-center mb-3">
                       <label className="block text-sm font-semibold text-[#1aa6b3]">Select Services <span className="text-red-500">*</span></label>
                       <span className="text-sm text-[#1aa6b3]/70 bg-[#1aa6b3]/10 px-3 py-1 rounded-full">{formData.selectedServices.length} service{formData.selectedServices.length !== 1 ? 's' : ''} selected</span>
                     </div>
+
                     {formData.selectedServices.length > 0 && (
                       <div className="mb-4 p-4 bg-gradient-to-r from-[#1aa6b3]/5 to-[#1aa6b3]/10 rounded-xl border border-[#1aa6b3]/20">
                         <p className="text-sm font-medium text-[#1aa6b3] mb-2 flex items-center gap-2"><CheckCircle className="w-4 h-4" />Selected Services:</p>
@@ -351,22 +344,6 @@ const BookingPage = () => {
                               <button type="button" onClick={() => removeService(service.id)} className="text-[#1aa6b3] hover:text-[#158993] hover:bg-[#1aa6b3]/10 rounded-full p-1 transition-all"><X className="w-4 h-4" /></button>
                             </div>
                           ))}
-                        </div>
-                      </div>
-                    )}
-                    {/* Inline ask more prompt */}
-                    {askMoreServices && (
-                      <div className="mb-4 flex items-center justify-between gap-3 bg-gradient-to-r from-[#1aa6b3]/10 to-[#1aa6b3]/5 border-2 border-[#1aa6b3]/30 rounded-2xl px-5 py-4 animate-scale-in">
-                        <p className="text-sm font-semibold text-[#1aa6b3]">✅ Service added! Would you like to add more?</p>
-                        <div className="flex gap-2 flex-shrink-0">
-                          <button type="button" onClick={() => setAskMoreServices(false)}
-                            className="px-4 py-2 text-xs font-bold rounded-full border-2 border-[#1aa6b3] text-[#1aa6b3] hover:bg-[#1aa6b3] hover:text-white transition-all duration-200">
-                            Yes
-                          </button>
-                          <button type="button" onClick={handleNoMoreServices}
-                            className="px-4 py-2 text-xs font-bold rounded-full bg-[#1aa6b3] text-white hover:bg-[#158993] transition-all duration-200">
-                            No, Continue
-                          </button>
                         </div>
                       </div>
                     )}
@@ -456,19 +433,17 @@ const BookingPage = () => {
               )}
               <h3 className="text-2xl font-bold mb-6 relative z-10 flex items-center gap-2"><Phone className="w-6 h-6" />Quick Contact</h3>
               <div className="space-y-4 relative z-10">
-                {/* Canada */}
                 <a href={`tel:${BRANCHES.CA.phone}`} className="flex items-start gap-4 p-4 bg-white/10 backdrop-blur-sm rounded-2xl hover:bg-white/20 transition-all border border-white/20 hover:scale-105 duration-300">
                   <Phone className="w-6 h-6 flex-shrink-0 mt-1" />
                   <div>
-                    <p className="font-semibold text-sm flex items-center gap-1">🇨🇦 Canada</p>
+                    <p className="font-semibold text-sm">Canada</p>
                     <p className="text-base">{BRANCHES.CA.phone}</p>
                   </div>
                 </a>
-                {/* India */}
                 <a href={`tel:${BRANCHES.IN.phone}`} className="flex items-start gap-4 p-4 bg-white/10 backdrop-blur-sm rounded-2xl hover:bg-white/20 transition-all border border-white/20 hover:scale-105 duration-300">
                   <Phone className="w-6 h-6 flex-shrink-0 mt-1" />
                   <div>
-                    <p className="font-semibold text-sm flex items-center gap-1">🇮🇳 India (Main Branch)</p>
+                    <p className="font-semibold text-sm">India (Main Branch)</p>
                     <p className="text-base">{BRANCHES.IN.phone}</p>
                   </div>
                 </a>
@@ -483,26 +458,21 @@ const BookingPage = () => {
               </div>
             </div>
 
-            {/* Service Areas - both branches */}
             <div ref={serviceAreasRef} className="fade-in-up bg-white rounded-3xl shadow-2xl p-8 border-t-4 border-[#1aa6b3] relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#1aa6b3]/5 rounded-full blur-2xl"></div>
               <div className="flex items-center gap-3 mb-5 relative z-10">
                 <MapPin className="w-6 h-6 text-[#1aa6b3]" />
                 <h3 className="text-2xl font-bold text-[#1aa6b3]">Our Locations</h3>
               </div>
-
-              {/* Canada */}
               <div className="mb-5 relative z-10">
-                <p className="text-xs font-bold text-[#1aa6b3]/60 uppercase tracking-wider mb-2">🇨🇦 Canada</p>
+                <p className="text-xs font-bold text-[#1aa6b3]/60 uppercase tracking-wider mb-2">Canada</p>
                 <div className="flex items-start gap-2 p-3 rounded-lg bg-[#1aa6b3]/5 border border-[#1aa6b3]/20">
                   <MapPin className="w-4 h-4 text-[#1aa6b3] flex-shrink-0 mt-0.5" />
                   <p className="text-sm text-[#1aa6b3] font-medium">{BRANCHES.CA.address}</p>
                 </div>
               </div>
-
-              {/* India */}
               <div className="relative z-10">
-                <p className="text-xs font-bold text-[#1aa6b3]/60 uppercase tracking-wider mb-2">🇮🇳 India</p>
+                <p className="text-xs font-bold text-[#1aa6b3]/60 uppercase tracking-wider mb-2">India</p>
                 <div className="flex items-start gap-2 p-3 rounded-lg bg-gradient-to-r from-[#1aa6b3]/20 to-[#1aa6b3]/10 border-2 border-[#1aa6b3]">
                   <MapPin className="w-4 h-4 text-[#1aa6b3] flex-shrink-0 mt-0.5" />
                   <div>
@@ -511,7 +481,6 @@ const BookingPage = () => {
                   </div>
                 </div>
               </div>
-
               <div className="mt-5 p-4 bg-gradient-to-r from-[#1aa6b3]/10 to-[#1aa6b3]/5 rounded-xl border border-[#1aa6b3]/20 relative z-10">
                 <p className="text-sm text-[#1aa6b3]"><strong>Note:</strong> Expanding to more cities soon. Contact us for availability in your area.</p>
               </div>
@@ -556,9 +525,9 @@ const BookingPage = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Need Immediate Assistance?</h2>
           <p className="text-lg mb-2 opacity-90">Our customer support team is here to help you with any queries</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8 text-sm opacity-80">
-            <span>🇨🇦 {BRANCHES.CA.phone}</span>
+            <span>Canada: {BRANCHES.CA.phone}</span>
             <span className="hidden sm:inline">|</span>
-            <span>🇮🇳 {BRANCHES.IN.phone}</span>
+            <span>India: {BRANCHES.IN.phone}</span>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href={`tel:${br.phone}`} className="inline-flex items-center justify-center gap-2 bg-white text-[#1aa6b3] px-8 py-4 rounded-full font-bold hover:shadow-2xl transition-all duration-300 hover:scale-105">

@@ -232,38 +232,38 @@ const Pricing = ({ onClose, onBookingClick }) => {
       <div className="relative w-full overflow-hidden" style={{ minHeight: 380 }}>
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/franchaise.jpg')" }} />
         <div className="absolute inset-0" style={{ background: 'rgba(10, 30, 50, 0.72)' }} />
-        <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-16 sm:py-20">
-          <div className="inline-flex items-center gap-2 border px-4 py-1.5 rounded-full mb-5"
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-16 sm:py-24">
+          {/* Top badge */}
+          <div className="inline-flex items-center gap-2 border px-4 py-1.5 rounded-full mb-6"
             style={{ background: 'rgba(26,166,179,0.18)', borderColor: 'rgba(26,166,179,0.5)' }}>
             <Sparkles className="w-3.5 h-3.5" style={{ color: '#1aa6b3' }} />
             <span className="text-sm font-semibold" style={{ color: '#1aa6b3' }}>Transparent Pricing · No Hidden Fees</span>
           </div>
-          <h1 className="text-4xl sm:text-6xl font-extrabold mb-4 leading-tight" style={{ color: '#1aa6b3', textShadow: '0 0 30px rgba(26,166,179,0.5)' }}>
+
+          {/* Main heading */}
+          <h1 className="text-4xl sm:text-6xl font-extrabold mb-3 leading-tight" style={{ color: '#1aa6b3', textShadow: '0 0 30px rgba(26,166,179,0.5)' }}>
             Our Pricing
           </h1>
-          <p className="text-base sm:text-lg font-medium mb-6" style={{ color: 'rgba(26,166,179,0.9)', textShadow: '0 0 12px rgba(26,166,179,0.4)' }}>
+          <p className="text-base sm:text-lg font-medium mb-10" style={{ color: 'rgba(26,166,179,0.9)', textShadow: '0 0 12px rgba(26,166,179,0.4)' }}>
             Professional laundry care at honest prices.
           </p>
-          <div className="inline-flex items-center gap-2 border px-5 py-2.5 rounded-full mb-5"
-            style={{ background: 'rgba(26,166,179,0.15)', borderColor: 'rgba(26,166,179,0.5)' }}>
-            <Truck className="w-4 h-4" style={{ color: '#1aa6b3' }} />
-            <span className="font-semibold text-sm" style={{ color: '#1aa6b3' }}>
-              FREE Pick up &amp; Drop on orders above {fmt(sym, rates.minOrder, 0)}
-            </span>
-          </div>
-          <div className="flex flex-wrap items-center justify-center gap-3 mt-2">
+
+          {/* 3 feature pills in a clean row */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 w-full max-w-3xl">
             {[
               { icon: Sparkles, label: '50% OFF 1st Order' },
-              { icon: Zap, label: 'Express 3-Hour Service Free' },
-              { icon: Shield, label: 'No Hidden Charges' },
+              { icon: Truck,    label: `FREE Pickup above ${fmt(sym, rates.minOrder, 0)}` },
+              { icon: Shield,   label: 'No Hidden Charges' },
             ].map((b, i) => (
-              <span key={i} className="inline-flex items-center gap-1.5 text-sm font-semibold px-4 py-2 rounded-full"
+              <div key={i} className="flex-1 inline-flex items-center justify-center gap-2 text-sm font-semibold px-5 py-3 rounded-2xl w-full"
                 style={{ background: 'rgba(26,166,179,0.18)', border: '1px solid rgba(26,166,179,0.4)', color: '#1aa6b3', backdropFilter: 'blur(8px)' }}>
-                <b.icon className="w-4 h-4" /> {b.label}
-              </span>
+                <b.icon className="w-4 h-4 flex-shrink-0" /> {b.label}
+              </div>
             ))}
           </div>
-          <div className="inline-flex items-center gap-3 mt-5 px-5 py-2.5 rounded-full"
+
+          {/* Currency switcher — bottom, standalone */}
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl"
             style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.25)', backdropFilter: 'blur(10px)' }}>
             <span className="text-white/80 text-xs font-semibold">Viewing prices in:</span>
             <CurrencyToggle currency={currency} onChange={setCurrency} />
@@ -304,8 +304,10 @@ const Pricing = ({ onClose, onBookingClick }) => {
               </div>
             </div>
             <div className="text-right">
-              <p className="text-2xl font-bold" style={{ color: '#1aa6b3' }}>Free</p>
-              <p className="text-gray-500 text-sm">No Extra Charge</p>
+              <p className="text-2xl font-bold currency-flip" key={`express-${currency}`} style={{ color: '#1aa6b3' }}>
+                {currency === 'INR' ? '₹150' : 'CA$2.50'}
+              </p>
+              <p className="text-gray-500 text-sm">Additional charge</p>
             </div>
           </div>
         </AnimatedSection>
@@ -502,7 +504,7 @@ const Pricing = ({ onClose, onBookingClick }) => {
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {['Free Softener Treatment','Free Stain Pretreatment','Free Cuff & Collar Cleaning',
-                'Free Disinfectant','Quality Detergent Included','Express 3-Hour Service Free'].map((item, i) => (
+                'Free Disinfectant','Quality Detergent Included','Free Pickup & Delivery'].map((item, i) => (
                 <div key={i} className="flex items-center gap-2 bg-white rounded-xl px-4 py-2.5 border shadow-sm"
                   style={{ borderColor: 'rgba(26,166,179,0.2)' }}>
                   <Check className="w-4 h-4 flex-shrink-0" style={{ color: '#1aa6b3' }} />

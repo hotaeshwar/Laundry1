@@ -222,7 +222,7 @@ const Franchise = () => {
         <div className="absolute bottom-20 left-10 w-96 h-96 bg-[#1aa6b3]/5 rounded-full blur-3xl"></div>
       </div>
 
-      {/* ── Hero ── FIX: pt-24/md:pt-28 pushes content below navbar */}
+      {/* ── Hero ── */}
       <section ref={heroRef} className="fade-in-up relative overflow-hidden text-white pt-36 pb-12 md:pt-40 md:pb-16 px-4">
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/images/franchaise.jpg')" }}></div>
         <div className="absolute inset-0 bg-black/55"></div>
@@ -302,7 +302,7 @@ const Franchise = () => {
             </div>
           </AnimatedSection>
 
-          {/* Point 2 — FIX: removed duplicate card-style table, kept only the styled table version */}
+          {/* Point 2 */}
           <AnimatedSection delay={150} className="mb-10 sm:mb-14">
             <div className="bg-gradient-to-br from-[#f0fafb] to-white rounded-3xl p-6 sm:p-10 border border-[#1aa6b3]/15 shadow-md">
               <div className="flex items-center gap-3 mb-4">
@@ -310,7 +310,6 @@ const Franchise = () => {
                 <h3 className="text-xl sm:text-2xl font-bold text-[#1aa6b3]">Laundry Is INDIA'S Most Profitable Franchise Business</h3>
               </div>
               <p className="text-sm sm:text-base text-[#1aa6b3]/80 leading-relaxed mb-5">The Laundry & Dry cleaning franchise offers high scope of growth with <span className="text-[#1aa6b3] font-bold">High ROI, Low Risk and Zero Hassles</span> — making Laundry the best investment.</p>
-              {/* Comparison table only — no duplicate image card */}
               <div className="overflow-x-auto rounded-xl border border-[#1aa6b3]/20 shadow-sm">
                 <table className="w-full text-xs sm:text-sm">
                   <thead>
@@ -347,7 +346,7 @@ const Franchise = () => {
             </div>
           </AnimatedSection>
 
-          {/* Point 3 — Low Investment Model — LADDER DESIGN */}
+          {/* Point 3 — Low Investment Model — FIXED LADDER */}
           <AnimatedSection delay={200} className="mb-10 sm:mb-14">
             <div className="bg-gradient-to-br from-[#f0fafb] to-white rounded-3xl p-6 sm:p-10 border border-[#1aa6b3]/15 shadow-md">
               <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-8 sm:mb-10">
@@ -355,7 +354,7 @@ const Franchise = () => {
                   <span className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-[#1aa6b3] text-[#1aa6b3] font-bold text-lg shrink-0">3</span>
                   <h3 className="text-xl sm:text-2xl font-bold text-[#1aa6b3]">Low-Investment & Small Format Model</h3>
                 </div>
-                {/* Currency toggle for Point 3 */}
+                {/* Currency toggle */}
                 <div className="flex items-center gap-2 px-4 py-2 rounded-full border self-start sm:self-auto" style={{ background: 'rgba(26,166,179,0.07)', borderColor: 'rgba(26,166,179,0.3)' }}>
                   <span className={`text-xs font-bold cursor-pointer transition-all ${currency === 'INR' ? 'text-[#1aa6b3]' : 'text-[#1aa6b3]/35'}`} onClick={() => setCurrency('INR')}>🇮🇳 INR</span>
                   <button
@@ -369,64 +368,100 @@ const Franchise = () => {
                 </div>
               </div>
 
+              {/* ── LADDER — MOBILE: vertical stack, DESKTOP: alternating timeline ── */}
               <div className="relative">
-                <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#1aa6b3]/40 via-[#1aa6b3] to-[#158993]/40 -translate-x-1/2"></div>
+                {/* Desktop center line */}
+                <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#1aa6b3]/40 via-[#1aa6b3] to-[#158993]/40 -translate-x-1/2 pointer-events-none"></div>
 
                 {[
                   { label: 'Typical Store Area',               value: curr.storeArea,  img: '/images/ro.jpg',  step: 1 },
-                  { label: 'Setup Cost (incl. franchise fee)',  value: curr.setupCost,  img: '/images/ro1.jpg', step: 2 },
+                  { label: 'Setup Cost (incl. Franchise Fee)',  value: curr.setupCost,  img: '/images/ro1.jpg', step: 2 },
                   { label: 'Average Revenue / Month',           value: curr.avgRevenue, img: '/images/ro4.jpg', step: 3 },
                   { label: 'Average Profitability / Month',     value: curr.avgProfit,  img: '/images/ro5.jpg', step: 4 },
                 ].map((item, i) => {
                   const isLeft = i % 2 === 0;
                   return (
-                    <div key={i} className={`relative flex flex-col md:flex-row items-center mb-8 sm:mb-10 gap-4 md:gap-0 ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                      <div className={`w-full md:w-5/12 ${isLeft ? 'md:pr-10' : 'md:pl-10'}`}>
-                        <div className="group bg-white rounded-2xl shadow-md hover:shadow-xl border border-[#1aa6b3]/20 hover:border-[#1aa6b3] transition-all duration-300 overflow-hidden flex flex-row md:flex-col sm:flex-row" style={{ minHeight: '110px' }}>
-                          <div className="relative w-36 sm:w-44 md:w-full md:h-44 shrink-0 overflow-hidden bg-gray-50 flex items-center justify-center">
-                            <img src={item.img} alt={item.label} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" style={{ minHeight: '120px' }} />
-                          </div>
-                          <div className="flex-1 p-4 flex flex-col justify-center">
-                            <p className="text-xs text-[#1aa6b3]/60 mb-1 uppercase tracking-wide font-medium">{item.label}</p>
-                            <p className="text-base sm:text-lg font-bold text-[#1aa6b3] leading-tight">{item.value}</p>
-                          </div>
+                    <div key={i} className="mb-6 sm:mb-8">
+
+                      {/* ── MOBILE card (block, no absolute positioning issues) ── */}
+                      <div className="md:hidden flex items-stretch gap-3 bg-white rounded-2xl shadow-md border border-[#1aa6b3]/20 overflow-hidden">
+                        {/* Step badge — inline, not absolute */}
+                        <div className="flex items-center justify-center w-10 shrink-0 bg-gradient-to-b from-[#1aa6b3] to-[#158993]">
+                          <span className="text-white font-bold text-sm">{item.step}</span>
+                        </div>
+                        {/* Image */}
+                        <div className="w-24 shrink-0 bg-gray-50 flex items-center justify-center overflow-hidden">
+                          <img src={item.img} alt={item.label} className="w-full h-full object-contain" style={{ maxHeight: 90 }} />
+                        </div>
+                        {/* Text — min-w-0 ensures it won't overflow */}
+                        <div className="flex-1 min-w-0 p-3 flex flex-col justify-center">
+                          <p className="text-[10px] text-[#1aa6b3]/60 uppercase tracking-wide font-medium mb-1 leading-tight">{item.label}</p>
+                          <p className="text-sm font-bold text-[#1aa6b3] leading-snug break-words">{item.value}</p>
                         </div>
                       </div>
-                      <div className="hidden md:flex w-2/12 flex-col items-center justify-center shrink-0 z-10">
-                        <div className="flex items-center justify-center w-11 h-11 rounded-full bg-gradient-to-br from-[#1aa6b3] to-[#158993] text-white font-bold text-base shadow-lg border-4 border-white">
-                          {item.step}
+
+                      {/* ── DESKTOP alternating timeline card ── */}
+                      <div className={`hidden md:flex items-center gap-0 ${isLeft ? 'flex-row' : 'flex-row-reverse'}`}>
+                        <div className={`w-5/12 ${isLeft ? 'pr-10' : 'pl-10'}`}>
+                          <div className="group bg-white rounded-2xl shadow-md hover:shadow-xl border border-[#1aa6b3]/20 hover:border-[#1aa6b3] transition-all duration-300 overflow-hidden flex flex-col">
+                            <div className="relative w-full h-44 overflow-hidden bg-gray-50 flex items-center justify-center">
+                              <img src={item.img} alt={item.label} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" />
+                            </div>
+                            <div className="p-4">
+                              <p className="text-xs text-[#1aa6b3]/60 mb-1 uppercase tracking-wide font-medium">{item.label}</p>
+                              <p className="text-lg font-bold text-[#1aa6b3] leading-tight">{item.value}</p>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div className="hidden md:block w-5/12"></div>
-                      <div className="md:hidden absolute -left-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-7 h-7 rounded-full bg-[#1aa6b3] text-white font-bold text-xs shadow-md border-2 border-white">
-                        {item.step}
+                        {/* Center bubble */}
+                        <div className="w-2/12 flex flex-col items-center justify-center shrink-0 z-10">
+                          <div className="flex items-center justify-center w-11 h-11 rounded-full bg-gradient-to-br from-[#1aa6b3] to-[#158993] text-white font-bold text-base shadow-lg border-4 border-white">
+                            {item.step}
+                          </div>
+                        </div>
+                        <div className="w-5/12"></div>
                       </div>
                     </div>
                   );
                 })}
 
-                {/* Gross Profit — LEFT side */}
-                <div className="relative flex flex-col md:flex-row items-center gap-4">
-                  <div className="w-full md:w-5/12 md:pr-10">
+                {/* Gross Profit card */}
+                {/* Mobile */}
+                <div className="md:hidden flex items-stretch gap-3 bg-gradient-to-r from-[#1aa6b3] to-[#158993] rounded-2xl shadow-lg overflow-hidden">
+                  <div className="flex items-center justify-center w-10 shrink-0 bg-black/10">
+                    <span className="text-white font-bold text-sm">5</span>
+                  </div>
+                  <div className="w-24 shrink-0 bg-white/20 flex items-center justify-center overflow-hidden">
+                    <img src="/images/ro6.jpg" alt="Gross Profit" className="w-full h-full object-contain" style={{ maxHeight: 90 }} />
+                  </div>
+                  <div className="flex-1 min-w-0 p-3 flex flex-col justify-center">
+                    <p className="text-[10px] text-white/70 uppercase tracking-wide font-medium mb-1">Gross Profit (%)</p>
+                    <p className="text-3xl font-black text-white leading-none mb-1">{curr.grossProfit}</p>
+                    <p className="text-[10px] text-white/80 leading-tight">Industry-leading margins, low overheads.</p>
+                  </div>
+                </div>
+
+                {/* Desktop */}
+                <div className="hidden md:flex items-center gap-0 flex-row">
+                  <div className="w-5/12 pr-10">
                     <div className="flex flex-row items-center gap-4 bg-gradient-to-r from-[#1aa6b3] to-[#158993] rounded-2xl p-4 sm:p-5 text-white shadow-lg overflow-hidden relative">
                       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top_right,_white_0%,_transparent_70%)]"></div>
                       <div className="relative w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-xl overflow-hidden shadow-lg bg-white/20 flex items-center justify-center">
                         <img src="/images/ro6.jpg" alt="Gross Profit" className="w-full h-full object-contain" />
                       </div>
-                      <div className="relative z-10">
+                      <div className="relative z-10 min-w-0">
                         <p className="text-white/80 text-xs uppercase tracking-widest mb-0.5 font-medium">Gross Profit (%)</p>
                         <p className="text-4xl sm:text-5xl font-black leading-none mb-1">{curr.grossProfit}</p>
                         <p className="text-white/80 text-xs leading-relaxed">Industry-leading margins, low overheads, scalable model.</p>
                       </div>
                     </div>
                   </div>
-                  <div className="hidden md:flex w-2/12 flex-col items-center justify-center shrink-0 z-10">
+                  <div className="w-2/12 flex flex-col items-center justify-center shrink-0 z-10">
                     <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#158993] to-[#0d6b76] text-white shadow-xl border-4 border-white">
                       <span className="text-lg font-black">5</span>
                     </div>
                   </div>
-                  <div className="hidden md:block w-5/12"></div>
-                  <div className="md:hidden absolute -left-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-7 h-7 rounded-full bg-[#158993] text-white font-bold text-xs shadow-md border-2 border-white">5</div>
+                  <div className="w-5/12"></div>
                 </div>
               </div>
             </div>
@@ -659,8 +694,6 @@ const Franchise = () => {
         .fade-in-up.animate-in { opacity: 1; transform: translateY(0); }
         .stagger-item { opacity: 0; transform: translateY(20px) scale(0.97); transition: opacity 0.3s cubic-bezier(0.4,0,0.2,1), transform 0.3s cubic-bezier(0.4,0,0.2,1); }
         .stagger-item.stagger-in { opacity: 1; transform: translateY(0) scale(1); }
-        @keyframes glow-pulse { 0%,100%{opacity:.5;filter:blur(8px);}50%{opacity:.8;filter:blur(12px);} }
-        .animate-glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
         @keyframes scale-in { 0%{opacity:0;transform:scale(.95);}100%{opacity:1;transform:scale(1);} }
         .animate-scale-in { animation: scale-in 0.3s cubic-bezier(0.4,0,0.2,1); }
         @keyframes fade-in { 0%{opacity:0;}100%{opacity:1;} }
@@ -671,7 +704,7 @@ const Franchise = () => {
         .animate-bounce-slow { animation: bounce-slow 2s ease-in-out infinite; }
         @media (prefers-reduced-motion: reduce) {
           .fade-in-up,.stagger-item{opacity:1;transform:none;transition:none;}
-          .animate-scale-in,.animate-fade-in,.animate-fade-in-out,.animate-bounce-slow,.animate-glow-pulse{animation:none;}
+          .animate-scale-in,.animate-fade-in,.animate-fade-in-out,.animate-bounce-slow{animation:none;}
         }
       `}</style>
     </div>

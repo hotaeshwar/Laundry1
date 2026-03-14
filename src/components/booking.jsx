@@ -27,7 +27,7 @@ const BRANCHES = {
 };
 
 const BookingPage = () => {
-  const br = BRANCHES['CA']; // ← change to 'IN' when switching to India
+  const br = BRANCHES['CA'];
 
   const generateBookingNumber = () => {
     const date = new Date();
@@ -57,13 +57,15 @@ const BookingPage = () => {
   const dateRef = useRef(null);
   const timeRef = useRef(null);
 
+  // ✅ ONLY CHANGE: Express 3-Hour Service added as 7th card
   const services = [
-    { id: 'wash-fold', name: 'Wash & Fold', icon: Package, image: '/images/laundry-service.png', description: 'Regular laundry service with folding', price: 'Starting at ₹100' },
-    { id: 'dry-clean', name: 'Dry Cleaning', icon: Shirt, image: '/images/dry-cleaning.png', description: 'Professional dry cleaning for delicate fabrics', price: 'Starting at ₹300' },
-    { id: 'steam-iron', name: 'Steam Iron', icon: Droplets, image: '/images/steam-iron.png', description: 'Premium ironing service', price: 'Starting at ₹200' },
-    { id: 'premium-care', name: 'Premium Care', icon: CheckCircle, image: '/images/medical.png', description: 'Special care for premium garments', price: 'Starting at ₹500' },
-    { id: 'shoe-cleaning', name: 'Shoe Cleaning', icon: Shirt, image: '/images/shoes.png', description: 'Professional shoe cleaning service', price: 'Starting at ₹250' },
-    { id: 'bag-cleaning', name: 'Bag Cleaning', icon: Package, image: '/images/shopping-bag.png', description: 'Handbag and backpack cleaning', price: 'Starting at ₹350' }
+    { id: 'wash-fold',     name: 'Wash & Fold',             icon: Package,      image: '/images/laundry-service.png',  description: 'Regular laundry service with folding',              price: 'Starting at ₹100' },
+    { id: 'dry-clean',     name: 'Dry Cleaning',            icon: Shirt,        image: '/images/dry-cleaning.png',     description: 'Professional dry cleaning for delicate fabrics',    price: 'Starting at ₹300' },
+    { id: 'steam-iron',    name: 'Steam Iron',              icon: Droplets,     image: '/images/steam-iron.png',       description: 'Premium ironing service',                           price: 'Starting at ₹200' },
+    { id: 'premium-care',  name: 'Premium Care',            icon: CheckCircle,  image: '/images/medical.png',          description: 'Special care for premium garments',                 price: 'Starting at ₹500' },
+    { id: 'shoe-cleaning', name: 'Shoe Cleaning',           icon: Shirt,        image: '/images/shoes.png',            description: 'Professional shoe cleaning service',                price: 'Starting at ₹250' },
+    { id: 'bag-cleaning',  name: 'Bag Cleaning',            icon: Package,      image: '/images/shopping-bag.png',     description: 'Handbag and backpack cleaning',                     price: 'Starting at ₹350' },
+    { id: 'express-3hr',   name: 'Express 3-Hour Service',  icon: Clock,        image: '/images/construction.png',     description: 'Rush laundry completed in just 3 hours',            price: '₹150' },
   ];
 
   const timeSlots = [
@@ -105,7 +107,6 @@ const BookingPage = () => {
     }
   };
 
-  // ── FIX: removed askMoreServices state and popup — services toggle silently ──
   const handleServiceSelect = (service) => {
     if (formData.selectedServices.some(s => s.id === service.id)) {
       setFormData(prev => ({ ...prev, selectedServices: prev.selectedServices.filter(s => s.id !== service.id) }));
@@ -327,7 +328,7 @@ const BookingPage = () => {
                     </div>
                   </div>
 
-                  {/* ── Services — no popup, just silent toggle ── */}
+                  {/* Services Grid */}
                   <div>
                     <div className="flex justify-between items-center mb-3">
                       <label className="block text-sm font-semibold text-[#1aa6b3]">Select Services <span className="text-red-500">*</span></label>
@@ -348,24 +349,55 @@ const BookingPage = () => {
                       </div>
                     )}
 
+                    {/* ✅ Same grid layout as existing cards — Express is just card #7 */}
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                       {services.map((service) => {
                         const isSelected = formData.selectedServices.some(s => s.id === service.id);
                         return (
-                          <button key={service.id} type="button" onClick={() => handleServiceSelect(service)}
-                            className={`p-5 rounded-2xl border-2 transition-all duration-300 hover:shadow-lg flex flex-col items-center group relative overflow-hidden ${isSelected ? 'border-[#1aa6b3] bg-gradient-to-br from-[#1aa6b3]/10 to-[#1aa6b3]/5 shadow-md scale-105' : 'border-gray-200 hover:border-[#1aa6b3] hover:bg-[#1aa6b3]/5'}`}>
-                            {isSelected && <div className="absolute top-2 right-2 bg-[#1aa6b3] rounded-full p-1"><CheckCircle className="w-4 h-4 text-white" /></div>}
-                            <div className={`w-12 h-12 mb-2 rounded-xl flex items-center justify-center p-2 transition-all duration-300 group-hover:scale-110 ${isSelected ? 'bg-[#1aa6b3]' : 'bg-[#1aa6b3]/10'}`}>
-                              <img src={service.image} alt={service.name} className="w-full h-full object-contain"
-                                style={{ filter: isSelected ? 'brightness(0) invert(1)' : 'none', opacity: isSelected ? 1 : 0.9 }}
+                          <button
+                            key={service.id}
+                            type="button"
+                            onClick={() => handleServiceSelect(service)}
+                            className={`p-5 rounded-2xl border-2 transition-all duration-300 hover:shadow-lg flex flex-col items-center group relative overflow-hidden ${
+                              isSelected
+                                ? 'border-[#1aa6b3] bg-gradient-to-br from-[#1aa6b3]/10 to-[#1aa6b3]/5 shadow-md scale-105'
+                                : 'border-gray-200 hover:border-[#1aa6b3] hover:bg-[#1aa6b3]/5'
+                            }`}
+                          >
+                            {isSelected && (
+                              <div className="absolute top-2 right-2 bg-[#1aa6b3] rounded-full p-1">
+                                <CheckCircle className="w-4 h-4 text-white" />
+                              </div>
+                            )}
+                            <div className={`w-12 h-12 mb-2 rounded-xl flex items-center justify-center p-2 transition-all duration-300 group-hover:scale-110 ${
+                              isSelected ? 'bg-[#1aa6b3]' : 'bg-[#1aa6b3]/10'
+                            }`}>
+                              <img
+                                src={service.image}
+                                alt={service.name}
+                                className="w-full h-full object-contain"
+                                style={{
+                                  filter: isSelected ? 'brightness(0) invert(1)' : 'none',
+                                  opacity: isSelected ? 1 : 0.9
+                                }}
                                 onError={(e) => {
                                   e.target.style.display = 'none';
                                   const p = e.target.parentElement;
-                                  if (p) { const f = document.createElement('span'); f.className = `text-lg font-bold ${isSelected ? 'text-white' : 'text-[#1aa6b3]'}`; f.textContent = service.name.charAt(0); p.appendChild(f); }
-                                }} />
+                                  if (p) {
+                                    const f = document.createElement('span');
+                                    f.className = `text-lg font-bold ${isSelected ? 'text-white' : 'text-[#1aa6b3]'}`;
+                                    f.textContent = service.name.charAt(0);
+                                    p.appendChild(f);
+                                  }
+                                }}
+                              />
                             </div>
-                            <p className={`text-sm font-medium text-center mb-1 ${isSelected ? 'text-[#1aa6b3] font-semibold' : 'text-[#1aa6b3]'}`}>{service.name}</p>
-                            <p className={`text-xs text-center ${isSelected ? 'text-[#1aa6b3]/80' : 'text-[#1aa6b3]/60'}`}>{service.price}</p>
+                            <p className={`text-sm font-medium text-center mb-1 ${isSelected ? 'text-[#1aa6b3] font-semibold' : 'text-[#1aa6b3]'}`}>
+                              {service.name}
+                            </p>
+                            <p className={`text-xs text-center ${isSelected ? 'text-[#1aa6b3]/80' : 'text-[#1aa6b3]/60'}`}>
+                              {service.price}
+                            </p>
                           </button>
                         );
                       })}

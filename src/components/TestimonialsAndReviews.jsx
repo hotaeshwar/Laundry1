@@ -80,7 +80,7 @@ const TestimonialsAndReviews = () => {
   }, [selectedVideo]);
 
   const videoTestimonials = [
-    { id: "1", thumbnail: "/images/testimonial1.png", embedUrl: "https://drive.google.com/file/d/1xRFJ_B-pTKeM8ps0_Yip953qLuIPjB8o/preview", rating: 5, location: "India" },  // ← changed
+    { id: "1", thumbnail: "/images/testimonial1.png", embedUrl: "https://drive.google.com/file/d/1xRFJ_B-pTKeM8ps0_Yip953qLuIPjB8o/preview", rating: 5, location: "India" },
     { id: "2", thumbnail: "/images/testimonial2.png", embedUrl: "https://drive.google.com/file/d/1nz5n-_0f5Oqb-vUgoRct2rzOGAsTfyP-/preview", rating: 5, location: "Canada" },
     { id: "3", thumbnail: "/images/Smiling woman in laundry section.png", embedUrl: "https://drive.google.com/file/d/1P1zpwKPIQYSWYqU6xB5A2g7iInGCInls/preview", rating: 5, location: "Canada" },
     { id: "4", thumbnail: "/images/Smiling man with puppy in laundry aisle.png", embedUrl: "https://drive.google.com/file/d/1dwgzcicLCRMcu0ke3ApiqzW5glRfVcc8/preview", rating: 5, location: "Canada" }
@@ -109,8 +109,9 @@ const TestimonialsAndReviews = () => {
           <h1 className="stagger-item text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 leading-tight bg-gradient-to-r from-[#1aa6b3] to-[#158993] bg-clip-text text-transparent">
             Customer Testimonials & Reviews
           </h1>
+          {/* ✅ ONLY CHANGE: removed "Jaipur" from both places */}
           <p className="stagger-item text-sm sm:text-base md:text-lg lg:text-xl mb-4 sm:mb-6 max-w-3xl mx-auto px-4 text-[#1aa6b3]/80">
-            Hear what our satisfied customers from Pushkar, Jaipur and Canada have to say about LaundryForAll
+            Hear what our satisfied customers from Pushkar and Canada have to say about LaundryForAll
           </p>
           <div className="flex flex-wrap justify-center gap-3 text-sm">
             {[{ icon: Star, label: '5-Star Reviews' }, { icon: ThumbsUp, label: 'Verified Customers' }, { icon: Award, label: 'Premium Service' }].map(({ icon: Icon, label }) => (
@@ -223,7 +224,8 @@ const TestimonialsAndReviews = () => {
         </div>
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10">
           <h2 className="stagger-item text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Join Thousands of Happy Customers</h2>
-          <p className="stagger-item text-base sm:text-lg text-white/90">Experience the best laundry service in Pushkar, Jaipur and Canada</p>
+          {/* ✅ ONLY CHANGE: removed "Jaipur" from CTA text too */}
+          <p className="stagger-item text-base sm:text-lg text-white/90">Experience the best laundry service in Pushkar and Canada</p>
         </div>
       </section>
 

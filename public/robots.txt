@@ -1,7 +1,6 @@
 User-agent: *
 Allow: /
 
-# Block any admin or private paths if you add them later
 Disallow: /src/
 
-Sitemap: https://laundryforall.ca/sitemap.xml
+Sitemap: https://laundryforall.com/sitemap.xml
